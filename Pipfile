@@ -8,6 +8,7 @@ pandas = "*"
 altair = "*"
 jupyterlab = "*"
 jupyter = "*"
+appnope = "*"
 
 [dev-packages]
 
