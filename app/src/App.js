@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  tidy,
-  filter,
-  arrange,
-  asc,
-  groupBy,
-  summarize,
-  min,
-  distinct
-} from "@tidyjs/tidy";
+import { tidy, filter, arrange, asc, groupBy } from "@tidyjs/tidy";
 import { Switch, Select } from "antd";
 
 import "./App.css";
@@ -17,7 +8,6 @@ import "antd/dist/antd.css";
 import LineChart from "./LineChart";
 import sourceData from "./clean_data.json";
 
-const SHOW_NAME = "Game of Thrones";
 const { Option } = Select;
 
 function App() {
@@ -50,15 +40,15 @@ function App() {
     console.log(`selected ${value}`);
     setSelectedSeries(value);
   }
-  function onBlur() {
-    console.log("blur");
-  }
-  function onFocus() {
-    console.log("focus");
-  }
-  function onSearch(val) {
-    console.log("search:", val);
-  }
+  //   function onBlur() {
+  //     console.log("blur");
+  //   }
+  //   function onFocus() {
+  //     console.log("focus");
+  //   }
+  //   function onSearch(val) {
+  //     console.log("search:", val);
+  //   }
 
   return (
     <div className="App">
@@ -71,9 +61,9 @@ function App() {
               placeholder="Select a TV Show"
               defaultValue={selectedSeries}
               onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch}
+              //   onFocus={onFocus}
+              //   onBlur={onBlur}
+              //   onSearch={onSearch}
               filterOption={(input, option) =>
                 option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
