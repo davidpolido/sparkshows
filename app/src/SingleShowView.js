@@ -14,6 +14,7 @@ export default function SingleShowView({ data }) {
   const [allSeries, setAllSeries] = useState([]);
   const [selectedSeries, setSelectedSeries] = useState("");
   const [showSeason, setShowSeason] = useState(false);
+  const [showGuides, setshowGuides] = useState(true);
 
   useEffect(() => {
     const singleShowData = tidy(
@@ -31,14 +32,16 @@ export default function SingleShowView({ data }) {
     setAllSeries(seriesList);
   }, [data, selectedSeries]);
 
+  function handleSeriesSelect(value) {
+    setSelectedSeries(value);
+  }
   const handleSeasonChange = (checked) => {
     setShowSeason(checked);
   };
 
-  function onChange(value) {
-    console.log(`selected ${value}`);
-    setSelectedSeries(value);
-  }
+  const handleGuidesChange = (checked) => {
+    setshowGuides(checked);
+  };
 
   return (
     <>
@@ -53,7 +56,7 @@ export default function SingleShowView({ data }) {
               fontSize: "20px"
             }}
             placeholder="Select a TV Show"
-            onChange={onChange}
+            onChange={handleSeriesSelect}
             allowClear={true}
             filterOption={(input, option) =>
               option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -65,13 +68,22 @@ export default function SingleShowView({ data }) {
               </Option>
             ))}
           </Select>
-          <Switch
-            checked={showSeason}
-            checkedChildren="Seasons"
-            unCheckedChildren="Seasons"
-            onChange={handleSeasonChange}
-            style={{ fontSize: "22px" }}
-          />
+          <span>
+            <Switch
+              checked={showSeason}
+              checkedChildren="Seasons"
+              unCheckedChildren="Seasons"
+              onChange={handleSeasonChange}
+              style={{ fontSize: "22px" }}
+            />
+            <Switch
+              checked={showGuides}
+              checkedChildren="Guides"
+              unCheckedChildren="Guides"
+              onChange={handleGuidesChange}
+              style={{ fontSize: "22px" }}
+            />
+          </span>
         </div>
       </div>
       {seriesData.length > 0 ? (
@@ -102,6 +114,7 @@ export default function SingleShowView({ data }) {
               <LineChart
                 data={seriesData}
                 showSeason={showSeason}
+                showGuides={showGuides}
                 parentWidth={parent.width}
                 parentHeight={parent.height}
               />

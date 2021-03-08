@@ -14,14 +14,10 @@ const xSelector = (d) => d.episodeContinuousNumber;
 const ySelector = (d) => d.episodeAverageRating;
 const seasonSelector = (d) => d.episodeSeasonNumber;
 
-export default function LineChart({
-  data,
-  showSeason,
-  parentWidth,
-  parentHeight
-}) {
-  const height = parentHeight > 0 ? parentHeight - 50 : 0;
-  const width = parentWidth > 0 ? parentWidth - 40 : 0;
+export default function LineChart(props) {
+  const { data, showGuides } = props;
+  const height = props.parentHeight > 0 ? props.parentHeight - 50 : 0;
+  const width = props.parentWidth > 0 ? props.parentWidth - 40 : 0;
   const numberEpisodes = d3Max(data, xSelector);
 
   // scales
@@ -59,7 +55,7 @@ export default function LineChart({
       <svg width={width} height={height}>
         <g>
           {seasonSummary.map((season) =>
-            showSeason ? (
+            props.showSeason ? (
               <g key={`season-${season.episodeSeasonNumber}`}>
                 <rect
                   x={xScale(season.min)}
@@ -93,37 +89,59 @@ export default function LineChart({
               </g>
             ) : null
           )}
-          <AxisLeft
-            tickClassName="axis-labels"
-            scale={yScale}
-            hideAxisLine
-            hideTicks
-            left={35}
-            tickValues={[0, 5, 10]}
-          />
-          <GridRows
-            scale={yScale}
-            width={xScale.range()[1] - xScale.range()[0]}
-            left={xScale.range()[0]}
-            stroke="#616161"
-            tickValues={[5]}
-            strokeDasharray={[5, 5]}
-          />
-          <GridRows
-            scale={yScale}
-            width={xScale.range()[1] - xScale.range()[0]}
-            left={xScale.range()[0]}
-            stroke="#E0E0E0"
-            tickValues={[2.5, 7.5]}
-            strokeDasharray={[5, 5]}
-          />
-          <GridRows
-            scale={yScale}
-            width={xScale.range()[1] - xScale.range()[0]}
-            left={xScale.range()[0]}
-            stroke="#E0E0E0"
-            tickValues={[0, 10]}
-          />
+          {showGuides ? (
+            <>
+              <AxisLeft
+                tickClassName="axis-labels"
+                scale={yScale}
+                hideAxisLine
+                hideTicks
+                left={35}
+                tickValues={[0, 5, 10]}
+              />
+              <GridRows
+                scale={yScale}
+                width={xScale.range()[1] - xScale.range()[0]}
+                left={xScale.range()[0]}
+                stroke="#616161"
+                tickValues={[5]}
+                strokeDasharray={[5, 5]}
+              />
+              <GridRows
+                scale={yScale}
+                width={xScale.range()[1] - xScale.range()[0]}
+                left={xScale.range()[0]}
+                stroke="#E0E0E0"
+                tickValues={[2.5, 7.5]}
+                strokeDasharray={[5, 5]}
+              />
+              <GridRows
+                scale={yScale}
+                width={xScale.range()[1] - xScale.range()[0]}
+                left={xScale.range()[0]}
+                stroke="#E0E0E0"
+                tickValues={[0, 10]}
+              />
+              <text
+                fill="#9e9e9e"
+                fontSize="15px"
+                textAnchor="middle"
+                transform={`translate(10, ${
+                  yScale.range()[0] / 2
+                }) rotate(-90)`}
+              >
+                Avg. Episode Rating
+              </text>
+              <text
+                x={width - 50}
+                y={height - 10}
+                fill="#9e9e9e"
+                fontSize="15px"
+              >
+                Episodes
+              </text>
+            </>
+          ) : null}
           <LinePath
             curve={curveLinear}
             data={data}
@@ -134,17 +152,6 @@ export default function LineChart({
             strokeOpacity={1}
           />
         </g>
-        <text
-          fill="#9e9e9e"
-          fontSize="15px"
-          textAnchor="middle"
-          transform={`translate(10, ${yScale.range()[0] / 2}) rotate(-90)`}
-        >
-          Avg. Episode Rating
-        </text>
-        <text x={width - 50} y={height - 10} fill="#9e9e9e" fontSize="15px">
-          Episodes
-        </text>
       </svg>
     </>
   );

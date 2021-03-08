@@ -71,6 +71,11 @@
 .ant-select-selection-placeholder {
   padding-top: 2px !important;
 }
+
+.ant-switch {
+  margin-left: 5px;
+}
+
 .ant-switch-inner {
   width: 40px;
   height: 20px;
