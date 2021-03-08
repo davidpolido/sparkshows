@@ -76,9 +76,27 @@ export default function SingleShowView({ data }) {
       </div>
       {seriesData.length > 0 ? (
         <div className="line-chart-card">
-          <h1 className="series-title" style={{ width: 800 }}>
-            {selectedSeries}
-          </h1>
+          <div className="line-chart-header">
+            <h1 className="series-title" style={{ width: 800 }}>
+              {selectedSeries}
+            </h1>
+            <p>
+              <span>{seriesData[0].seriesNumSeasons}</span>
+              <br />
+              Seasons
+            </p>
+            <p>
+              <span>{seriesData[0].seriesNumEpisodes}</span>
+              <br />
+              Episodes
+            </p>
+            <p>
+              <span>{seriesData[0].seriesAverageRating}</span>
+              <br />
+              Avg. Rating
+            </p>
+          </div>
+
           <ParentSize className="line-chart">
             {(parent) => (
               <LineChart
