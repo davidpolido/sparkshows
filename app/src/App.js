@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { tidy, filter, arrange, asc, groupBy } from "@tidyjs/tidy";
 import { Switch, Select } from "antd";
+import { ParentSize } from "@vx/responsive";
 
 import "./App.css";
 import "antd/dist/antd.css";
@@ -12,7 +13,7 @@ const { Option } = Select;
 
 function App() {
   const [data, setData] = useState([]);
-  const [selectedSeries, setSelectedSeries] = useState("Game of Thrones");
+  const [selectedSeries, setSelectedSeries] = useState("");
   const [showSeason, setShowSeason] = useState(false);
   const [allSeries, setAllSeries] = useState([]);
 
@@ -40,30 +41,30 @@ function App() {
     console.log(`selected ${value}`);
     setSelectedSeries(value);
   }
-  //   function onBlur() {
-  //     console.log("blur");
-  //   }
-  //   function onFocus() {
-  //     console.log("focus");
-  //   }
-  //   function onSearch(val) {
-  //     console.log("search:", val);
-  //   }
 
   return (
     <div className="App">
-      {data ? (
-        <>
-          <div style={{ marginBottom: "30px" }}>
+      <>
+        <header className="app-header">
+          <h1 className="app-name">SparkShows</h1>
+          <div className="view-buttons-area">
+            <button className="view-button active">Single Show Details</button>
+            <button className="view-button">Small Multiples</button>
+          </div>
+        </header>
+        <div className="control-panel-card">
+          <h1 className="control-panel-label">CONTROLS</h1>
+          <div className="control-panel-inputs">
             <Select
               showSearch
-              style={{ width: 400, marginRight: 20, fontSize: "24px" }}
+              style={{
+                width: "50%",
+                marginRight: 20,
+                fontSize: "20px"
+              }}
               placeholder="Select a TV Show"
-              defaultValue={selectedSeries}
               onChange={onChange}
-              //   onFocus={onFocus}
-              //   onBlur={onBlur}
-              //   onSearch={onSearch}
+              allowClear={true}
               filterOption={(input, option) =>
                 option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
@@ -79,11 +80,28 @@ function App() {
               checkedChildren="Seasons"
               unCheckedChildren="Seasons"
               onChange={handleSeasonChange}
+              style={{ fontSize: "22px" }}
             />
           </div>
-          <LineChart data={data} showSeason={showSeason} />
-        </>
-      ) : null}
+        </div>
+        {data.length > 0 ? (
+          <div className="line-chart-card">
+            <h1 className="series-title" style={{ width: 800 }}>
+              {selectedSeries}
+            </h1>
+            <ParentSize className="line-chart">
+              {(parent) => (
+                <LineChart
+                  data={data}
+                  showSeason={showSeason}
+                  parentWidth={parent.width}
+                  parentHeight={parent.height}
+                />
+              )}
+            </ParentSize>
+          </div>
+        ) : null}
+      </>
     </div>
   );
 }

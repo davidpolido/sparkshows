@@ -1,10 +1,114 @@
 .App {
-  text-align: center;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Teko;
+  min-width: 1120px;
 }
 
-.switch {
+.app-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.app-name {
+  margin: 0px 15px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.view-buttons-area {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.view-button {
+  font-size: 18px;
+  line-height: 25px;
+  height: 30px;
+  width: 140px;
+  margin: 10px;
+  border: 1px solid rgb(191, 191, 191);
+  background-color: rgb(191, 191, 191);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.view-button:hover {
+  transition-duration: 0.25s;
+  font-size: 20px;
+  border: 1px solid rgb(24, 144, 255);
+}
+
+.active {
+  border: 1px solid rgb(24, 144, 255);
+  background-color: rgb(24, 144, 255);
+  pointer-events: none;
+}
+
+.control-panel-card {
+  width: 80%;
+  max-width: 1400px;
+  background-color: #fff;
+  padding: 20px 40px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  box-shadow: "15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff";
+  display: "flex";
+}
+
+.control-panel-label {
+  font-family: "Teko";
+  font-size: 30px;
+  color: #9e9e9e;
+}
+
+.control-panel-inputs {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.series-title {
+  text-align: left;
+  font-family: "Teko";
+  font-size: 40px;
+}
+
+.line-chart-card {
+  max-width: 1400px;
+  height: 450px;
+  background-color: #fff;
+  padding: 40px;
+  padding-top: 20px;
+  text-align: center;
+  width: 80%;
+  border: solid 2px #ffffff;
+  border-radius: 15px;
+  box-shadow: 15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+}
+
+.line-chart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.ant-select-selection-item {
+  padding-top: 2px !important;
+}
+
+.ant-select-selection-placeholder {
+  padding-top: 2px !important;
+}
+.ant-switch-inner {
   width: 40px;
   height: 20px;
-  margin-bottom: 8px;
+  font-size: 14px !important;
 }
