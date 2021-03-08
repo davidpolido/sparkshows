@@ -28,11 +28,13 @@
 }
 
 .view-button {
+  transition-duration: 0.25s;
   font-size: 18px;
   line-height: 25px;
   height: 30px;
   width: 140px;
   margin: 10px;
+  padding-top: 3px;
   border: 1px solid rgb(191, 191, 191);
   background-color: rgb(191, 191, 191);
   border-radius: 5px;
@@ -41,7 +43,7 @@
 
 .view-button:hover {
   transition-duration: 0.25s;
-  font-size: 20px;
+  font-size: 19px;
   border: 1px solid rgb(24, 144, 255);
 }
 

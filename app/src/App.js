@@ -16,6 +16,7 @@ function App() {
   const [selectedSeries, setSelectedSeries] = useState("");
   const [showSeason, setShowSeason] = useState(false);
   const [allSeries, setAllSeries] = useState([]);
+  const [view, setView] = useState("single");
 
   useEffect(() => {
     const singleShowData = tidy(
@@ -33,6 +34,10 @@ function App() {
     setAllSeries(seriesList);
   }, [selectedSeries]);
 
+  function createViewButtonClass(button) {
+    return button === view ? "view-button active" : "view-button";
+  }
+
   const handleSeasonChange = (checked) => {
     setShowSeason(checked);
   };
@@ -42,14 +47,30 @@ function App() {
     setSelectedSeries(value);
   }
 
+  function handleViewChange(e) {
+    setView(e.target.id);
+  }
+
   return (
     <div className="App">
       <>
         <header className="app-header">
           <h1 className="app-name">SparkShows</h1>
           <div className="view-buttons-area">
-            <button className="view-button active">Single Show Details</button>
-            <button className="view-button">Small Multiples</button>
+            <button
+              id="single"
+              className={createViewButtonClass("single")}
+              onClick={handleViewChange}
+            >
+              Single Show Details
+            </button>
+            <button
+              id="multiple"
+              className={createViewButtonClass("multiple")}
+              onClick={handleViewChange}
+            >
+              Small Multiples
+            </button>
           </div>
         </header>
         <div className="control-panel-card">

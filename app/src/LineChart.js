@@ -20,9 +20,10 @@ export default function LineChart({
   parentWidth,
   parentHeight
 }) {
-  const height = parentHeight - 50;
-  const width = parentWidth - 40;
+  const height = parentHeight > 0 ? parentHeight - 50 : 0;
+  const width = parentWidth > 0 ? parentWidth - 40 : 0;
   const numberEpisodes = d3Max(data, xSelector);
+
   // scales
   const xScale = scaleLinear({
     domain: [1, numberEpisodes],
@@ -52,9 +53,7 @@ export default function LineChart({
     ])
   );
   const maxSeasonNumber = d3Max(seasonSummary, seasonSelector);
-  if (height === 0) {
-    return;
-  }
+
   return (
     <>
       <svg width={width} height={height}>
@@ -136,8 +135,6 @@ export default function LineChart({
           />
         </g>
         <text
-          //   x={0}
-          //   y={height / 2}
           fill="#9e9e9e"
           fontSize="15px"
           textAnchor="middle"
