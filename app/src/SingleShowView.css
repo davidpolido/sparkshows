@@ -1,4 +1,4 @@
-.control-panel-card {
+.ssv-control-panel-card {
   width: 80%;
   max-width: 1400px;
   background-color: #fff;
@@ -9,26 +9,26 @@
   display: "flex";
 }
 
-.control-panel-label {
+.ssv-control-panel-label {
   font-family: "Teko";
   font-size: 30px;
   color: #9e9e9e;
 }
 
-.control-panel-inputs {
+.ssv-control-panel-inputs {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.series-title {
+.ssv-series-title {
   text-align: left;
   font-family: "Teko";
   font-size: 40px;
 }
 
-.line-chart-card {
+.ssv-line-chart-card {
   max-width: 1400px;
   height: 450px;
   background-color: #fff;
@@ -41,34 +41,40 @@
   box-shadow: 15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
 }
 
-.line-chart {
+.ssv-line-chart {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px 0px;
 }
 
-.line-chart-header {
+.ssv-line-chart-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-.line-chart-header p {
+.ssv-line-chart-header p {
   color: #9e9e9e;
   width: 80px;
   font-size: 18px;
 }
 
-.line-chart-header span {
+.ssv-line-chart-header span {
   font-weight: bold;
   color: #757575;
+  font-size: 24px;
+}
+
+.ssv-series-stats {
+  display: flex;
 }
 
 .ant-select-selection-item {
   padding-top: 2px !important;
 }
 
-.ant-select-selection-placeholder {
+.ssv-ant-select-selection-placeholder {
   padding-top: 2px !important;
 }
 

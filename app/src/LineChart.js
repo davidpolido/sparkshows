@@ -15,19 +15,17 @@ const ySelector = (d) => d.episodeAverageRating;
 const seasonSelector = (d) => d.episodeSeasonNumber;
 
 export default function LineChart(props) {
-  const { data, showGuides } = props;
-  const height = props.parentHeight > 0 ? props.parentHeight - 50 : 0;
-  const width = props.parentWidth > 0 ? props.parentWidth - 40 : 0;
+  const { data, height, width, yScaleMin, yScaleMax, yScalePadding } = props;
   const numberEpisodes = d3Max(data, xSelector);
-
+  const validatedWidth = width <= 40 ? width + 20 : width - 30;
   // scales
   const xScale = scaleLinear({
     domain: [1, numberEpisodes],
-    range: [30, width - 10]
+    range: [30, validatedWidth]
   });
   const yScale = scaleLinear({
-    domain: [0, 10],
-    range: [height - 30, 10]
+    domain: [yScaleMin, yScaleMax],
+    range: [height - yScalePadding.bottom, yScalePadding.top]
   });
   const textScale = scaleLinear({
     domain: [35, 1],
@@ -52,10 +50,10 @@ export default function LineChart(props) {
 
   return (
     <>
-      <svg width={width} height={height}>
+      <svg width={validatedWidth} height={height}>
         <g>
           {seasonSummary.map((season) =>
-            props.showSeason ? (
+            props.showSeasons ? (
               <g key={`season-${season.episodeSeasonNumber}`}>
                 <rect
                   x={xScale(season.min)}
@@ -89,7 +87,7 @@ export default function LineChart(props) {
               </g>
             ) : null
           )}
-          {showGuides ? (
+          {props.showGuides ? (
             <>
               <AxisLeft
                 tickClassName="axis-labels"
@@ -133,7 +131,7 @@ export default function LineChart(props) {
                 Avg. Episode Rating
               </text>
               <text
-                x={width - 50}
+                x={xScale.range()[1] - 45}
                 y={height - 10}
                 fill="#9e9e9e"
                 fontSize="15px"
@@ -148,7 +146,11 @@ export default function LineChart(props) {
             x={(d) => xScale(xSelector(d))}
             y={(d) => yScale(ySelector(d))}
             stroke="#000"
-            strokeWidth={lineWidthScale(d3Max(data, xSelector))}
+            strokeWidth={
+              props.lineWidthOverride
+                ? props.lineWidthOverride
+                : lineWidthScale(d3Max(data, xSelector))
+            }
             strokeOpacity={1}
           />
         </g>

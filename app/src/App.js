@@ -2,6 +2,7 @@ import { useState } from "react";
 import "antd/dist/antd.css";
 
 import SingleShowView from "./SingleShowView";
+import SmallMultiplesView from "./SmallMultiplesView";
 import data from "./data/clean_data.json";
 
 import "./App.css";
@@ -41,7 +42,7 @@ function App() {
       {view === "single" ? (
         <SingleShowView data={data} />
       ) : (
-        <p>Nothing to see..</p>
+        <SmallMultiplesView data={data} />
       )}
     </div>
   );

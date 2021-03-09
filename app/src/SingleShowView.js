@@ -13,7 +13,7 @@ export default function SingleShowView({ data }) {
   const [seriesData, setSeriesData] = useState([]);
   const [allSeries, setAllSeries] = useState([]);
   const [selectedSeries, setSelectedSeries] = useState("");
-  const [showSeason, setShowSeason] = useState(false);
+  const [showSeasons, setShowSeasons] = useState(false);
   const [showGuides, setshowGuides] = useState(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function SingleShowView({ data }) {
     setSelectedSeries(value);
   }
   const handleSeasonChange = (checked) => {
-    setShowSeason(checked);
+    setShowSeasons(checked);
   };
 
   const handleGuidesChange = (checked) => {
@@ -45,9 +45,9 @@ export default function SingleShowView({ data }) {
 
   return (
     <>
-      <div className="control-panel-card">
-        <h1 className="control-panel-label">CONTROLS</h1>
-        <div className="control-panel-inputs">
+      <div className="ssv-control-panel-card">
+        <h1 className="ssv-control-panel-label">SINGLE SHOW VIEW CONTROLS</h1>
+        <div className="ssv-control-panel-inputs">
           <Select
             showSearch
             style={{
@@ -70,7 +70,7 @@ export default function SingleShowView({ data }) {
           </Select>
           <span>
             <Switch
-              checked={showSeason}
+              checked={showSeasons}
               checkedChildren="Seasons"
               unCheckedChildren="Seasons"
               onChange={handleSeasonChange}
@@ -87,36 +87,41 @@ export default function SingleShowView({ data }) {
         </div>
       </div>
       {seriesData.length > 0 ? (
-        <div className="line-chart-card">
-          <div className="line-chart-header">
-            <h1 className="series-title" style={{ width: 800 }}>
+        <div className="ssv-line-chart-card">
+          <div className="ssv-line-chart-header">
+            <h1 className="ssv-series-title" style={{ width: 800 }}>
               {selectedSeries}
             </h1>
-            <p>
-              <span>{seriesData[0].seriesNumSeasons}</span>
-              <br />
-              Seasons
-            </p>
-            <p>
-              <span>{seriesData[0].seriesNumEpisodes}</span>
-              <br />
-              Episodes
-            </p>
-            <p>
-              <span>{seriesData[0].seriesAverageRating}</span>
-              <br />
-              Avg. Rating
-            </p>
+            <div className="ssv-series-stats">
+              <p>
+                <span>{seriesData[0].seriesNumSeasons}</span>
+                <br />
+                Seasons
+              </p>
+              <p>
+                <span>{seriesData[0].seriesNumEpisodes}</span>
+                <br />
+                Episodes
+              </p>
+              <p>
+                <span>{seriesData[0].seriesAverageRating}</span>
+                <br />
+                Avg. Rating
+              </p>
+            </div>
           </div>
 
-          <ParentSize className="line-chart">
+          <ParentSize className="ssv-line-chart">
             {(parent) => (
               <LineChart
                 data={seriesData}
-                showSeason={showSeason}
+                showSeasons={showSeasons}
                 showGuides={showGuides}
-                parentWidth={parent.width}
-                parentHeight={parent.height}
+                width={parent.width > 0 ? parent.width - 40 : 0}
+                height={parent.height > 0 ? parent.height - 50 : 0}
+                yScaleMax={10}
+                yScaleMin={0}
+                yScalePadding={{ top: 6, bottom: 25 }}
               />
             )}
           </ParentSize>
