@@ -74,14 +74,12 @@ export default function SingleShowView({ data }) {
               checkedChildren="Seasons"
               unCheckedChildren="Seasons"
               onChange={handleSeasonChange}
-              style={{ fontSize: "22px" }}
             />
             <Switch
               checked={showGuides}
               checkedChildren="Guides"
               unCheckedChildren="Guides"
               onChange={handleGuidesChange}
-              style={{ fontSize: "22px" }}
             />
           </span>
         </div>
