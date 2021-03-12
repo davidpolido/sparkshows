@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { tidy, groupBy } from "@tidyjs/tidy";
 import "antd/dist/antd.css";
 
+import Homepage from "./Homepage";
 import SingleShowView from "./SingleShowView";
 import SmallMultiplesView from "./SmallMultiplesView";
 import data from "./data/clean_data.json";
@@ -9,6 +11,16 @@ import "./App.css";
 
 function App() {
   const [view, setView] = useState("home");
+  const [seriesList, setSeriesList] = useState([]);
+
+  useEffect(() => {
+    const newSeriesList = tidy(
+      data,
+      groupBy("seriesTitle", [], groupBy.keys())
+    );
+
+    setSeriesList(newSeriesList);
+  }, []);
 
   function createViewButtonClass(button) {
     return button === view ? "view-button active" : "view-button";
@@ -20,18 +32,20 @@ function App() {
   let ViewComponent;
   switch (view) {
     case "single":
-      ViewComponent = <SingleShowView data={data} />;
+      ViewComponent = <SingleShowView seriesList={seriesList} data={data} />;
       break;
     case "multiple":
-      ViewComponent = <SmallMultiplesView data={data} />;
+      ViewComponent = (
+        <SmallMultiplesView seriesList={seriesList} data={data} />
+      );
       break;
     default:
-      ViewComponent = <h1>Howdy</h1>;
+      ViewComponent = <Homepage seriesList={seriesList} />;
   }
   return (
     <div className="App">
       <header className="app-header">
-        <h1 className="app-name">SparkShows</h1>
+        <h1 className="app-name">SparkSeries</h1>
       </header>
       <div className="view-buttons-area">
         <button
