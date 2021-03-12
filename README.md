@@ -1,1 +1,1 @@
-These visualizations use the datasets about TV Shows (originally from IMDB) that can be found here: https://www.kaggle.com/hazimahmed/imdb-tv-dataset
+Webapp can be found at: https://sparkshows.netlify.app/
