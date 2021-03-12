@@ -7,7 +7,7 @@ export default function SingleShowView(props) {
     <>
       <div className="hp-main-card">
         <h1 className="hp-main-card-title">
-          Welcome to <span style={{ fontSize: "40px" }}> SparkSeries </span>
+          Welcome to <span style={{ fontSize: "40px" }}> SparkShows </span>
         </h1>
         <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
           <iframe

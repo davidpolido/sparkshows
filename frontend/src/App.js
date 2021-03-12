@@ -45,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1 className="app-name">SparkSeries</h1>
+        <h1 className="app-name">SparkShows</h1>
       </header>
       <div className="view-buttons-area">
         <button
